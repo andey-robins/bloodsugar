@@ -9,7 +9,10 @@ public:
     ~List();
 
     bool isEmpty() const;
+    float removeFirst();
 
 private:
     Node *first;
-}
+};
+
+#endif
