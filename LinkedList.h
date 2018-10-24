@@ -10,9 +10,12 @@ public:
 
     bool isEmpty() const;
     float removeFirst();
+    void addData(float x);
 
-private:
+    float sum() const;
+
     Node *first;
+    int day;
 };
 
 #endif
