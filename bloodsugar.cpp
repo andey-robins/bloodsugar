@@ -9,6 +9,7 @@
 #include <string>
 #include <regex>
 #include <limits>
+#include <cmath>
 
 using namespace std;
 
@@ -141,10 +142,24 @@ void weeklySummary(List* data [], int day) {
         count += today->count();
     }
 
+    //find the deltas
+    int deltaDay = 1;
+    float delta = 0.f;
+    for (int i = 1; i < validDays; i++) {
+        List* today = thisWeek[i];
+        List* yesterday = thisWeek[i - 1];
+
+        if (abs(today->count() - yesterday->count()) > delta) {
+            delta = abs(today->count() - yesterday->count());
+            deltaDay = i;
+        }
+    }
+
     //full output of weekly summary
     cout << "The sum of all readings this week: " << totalSum << endl;
     cout << "The maximum of readings this week: " << max << endl;
     cout << "The minimum of readings this week: " << min << endl;
     cout << "The count of readings this week  : " << count << endl;
+    cout << deltaDay << " day(s) ago, the delta was the greatest." << endl;
 
 }
