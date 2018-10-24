@@ -1,3 +1,9 @@
+//
+//  Code by Jacob "Andey" Tuttle
+//  Last Update October 24, 2018
+//  Liscenced under Mozilla Public Liscence 2.0
+//
+
 #ifndef _LINKED_LIST_H_
 #define _LINKED_LIST_H_
 

@@ -1,3 +1,9 @@
+//
+//  Code by Jacob "Andey" Tuttle
+//  Last Update October 23, 2018
+//  Liscenced under Mozilla Public Liscence 2.0
+//
+
 #ifndef NULL
 #define NULL (0)
 #endif

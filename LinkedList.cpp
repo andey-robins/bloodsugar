@@ -1,5 +1,14 @@
+//
+//  Code by Jacob "Andey" Tuttle
+//  Last Update October 24, 2018
+//  Liscenced under Mozilla Public Liscence 2.0
+//
+
 #include "LinkedList.h"
 
+//
+//  CONSTRUCTORS AND DESTRUCTORS FOLLOW
+//
 List::List(){
     first = NULL;
 }
@@ -10,6 +19,9 @@ List::~List(){
 	}
 }
 
+//
+//  LIST MUTIBLE FUNCTIONS FOLLOW
+//
 float List::removeFirst() {
     float item = first->value;
 	Node* tempPtr = first;
@@ -40,6 +52,9 @@ void List::addData(float x) {
   return;
 }
 
+//
+//  DATA PROCESSING FUNCTIONS FOLLOW
+//
 //return the sum of all items in the list
 float List::sum() const {
 
@@ -61,6 +76,7 @@ float List::sum() const {
 
 }
 
+//return the max value in the list
 float List::max() const {
 
     if (first == NULL) {
@@ -82,6 +98,7 @@ float List::max() const {
     }
 }
 
+//return the min value in the list
 float List::min() const {
 
     if (first == NULL) {
@@ -103,6 +120,7 @@ float List::min() const {
     }
 }
 
+//returnt the number of entries in the list
 int List::count() const {
 
     if (first == NULL) {

@@ -1,6 +1,6 @@
 //
 //  Code by Jacob "Andey" Tuttle
-//  Last Update October 9, 2018
+//  Last Update October 24, 2018
 //  Liscenced under Mozilla Public Liscence 2.0
 //
 
@@ -31,6 +31,7 @@ int main(){
     }
     int day = 0;
 
+    //main program loop
     while (cont) {
 
         //prompt the user for input
@@ -72,19 +73,22 @@ int main(){
     return 0;
 }
 
+//add an entry to the day
 void recordData(float n, List* data [], int d) {
 
     List* today = data[d % 14];
 
-    //if the day hasn't been made before
+    //if the day hasn't had an entry before, create a list for it
     if (d != today->day) {
         today->day = d;
     }
 
+    //add data to the list
     today->addData(n);
 
 }
 
+//provide the daily summary of information
 void dailySummary(List* data [], int day) {
 
     List* head;
@@ -100,6 +104,7 @@ void dailySummary(List* data [], int day) {
 //generate the weekly summary
 void weeklySummary(List* data [], int day) {
 
+    //error checks if you want a weekly summary before 7 days have been recorded
     int validDays;
     if (day < 7) {
         validDays = day + 1;
