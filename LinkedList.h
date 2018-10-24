@@ -13,6 +13,9 @@ public:
     void addData(float x);
 
     float sum() const;
+    float max() const;
+    float min() const;
+    int count() const;
 
     Node *first;
     int day;
