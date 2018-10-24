@@ -91,6 +91,9 @@ void dailySummary(List* data [], int day) {
     head = data[day % 14];
 
     cout << "The sum of all readings today: " << head->sum() << endl;
+    cout << "The maximum value read today : " << head->max() << endl;
+    cout << "The minimum value read today : " << head->min() << endl;
+    cout << "The count of all values today: " << head->count() << endl;
 
 }
 
