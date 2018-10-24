@@ -8,13 +8,14 @@
 #include <iostream>
 #include <string>
 #include <regex>
+#include <limits>
 
 using namespace std;
 
 //function declarations
 void recordData(float n, List* data [], int day);
 void dailySummary(List* data [], int day);
-void weeklySummary();
+void weeklySummary(List* data [], int day);
 
 int main(){
 
@@ -52,7 +53,7 @@ int main(){
 
         } else if (nextCommand == "w" || nextCommand == "Week" || nextCommand == "week") {
             //execute weekly code
-            weeklySummary();
+            weeklySummary(pastDays, day);
 
         } else if (nextCommand == "n" || nextCommand == "Next" || nextCommand == "next") {
             //move to the next day
@@ -73,11 +74,9 @@ int main(){
 void recordData(float n, List* data [], int d) {
 
     List* today = data[d % 14];
-    cout << today->first << " " << today->day << endl;
 
     //if the day hasn't been made before
     if (d != today->day) {
-        cout << "new thing" << endl;
         today->day = d;
     }
 
@@ -97,6 +96,55 @@ void dailySummary(List* data [], int day) {
 
 }
 
-void weeklySummary() {
+//generate the weekly summary
+void weeklySummary(List* data [], int day) {
+
+    int validDays;
+    if (day < 7) {
+        validDays = day + 1;
+    } else {
+        validDays = 7;
+    }
+
+    //fill this week with the last seven days. Today being in index 0 and 1 week ago in index 6
+    List* thisWeek [validDays];
+    for (int i = 0; i < validDays; i++) {
+        thisWeek[i] = data[(day - i) % 14];
+    }
+
+    //calculate total sum of the week
+    float totalSum = 0.f;
+    for (int i = 0; i < validDays; i++) {
+        List* today = thisWeek[i];
+        totalSum += today->sum();
+    }
+
+    //find the maximum and minimum values for the week
+    float max = 0.f;
+    float min = numeric_limits<float>::max();
+    for (int i = 0; i < validDays; i++) {
+        List* today = thisWeek[i];
+
+        if (today->max() > max) {
+            max = today->max();
+        }
+
+        if (today->min() < min) {
+            min = today->min();
+        }
+    }
+
+    //find the count of readings taken this week
+    int count = 0;
+    for (int i = 0; i < validDays; i++) {
+        List* today = thisWeek[i];
+        count += today->count();
+    }
+
+    //full output of weekly summary
+    cout << "The sum of all readings this week: " << totalSum << endl;
+    cout << "The maximum of readings this week: " << max << endl;
+    cout << "The minimum of readings this week: " << min << endl;
+    cout << "The count of readings this week  : " << count << endl;
 
 }
