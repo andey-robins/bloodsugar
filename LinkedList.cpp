@@ -14,8 +14,8 @@ List::List(){
 }
 
 List::~List(){
-    while (!isEmpty()) {
-		removeFirst();
+  while (!isEmpty()) {
+	   removeFirst();
 	}
 }
 
@@ -24,10 +24,10 @@ List::~List(){
 //
 float List::removeFirst() {
     float item = first->value;
-	Node* tempPtr = first;
-	first = first->next;
-	delete tempPtr;
-	return item;
+    Node* tempPtr = first;
+    first = first->next;
+    delete tempPtr;
+    return item;
 }
 
 bool List::isEmpty() const {
@@ -36,8 +36,8 @@ bool List::isEmpty() const {
 
 void List::addData(float x) {
 
-  if (first == NULL){
-    first = new Node(x, first);
+    if (first == NULL){
+        first = new Node(x, first);
 
   } else {
 		Node* newEntry = new Node(x);
@@ -67,7 +67,14 @@ float List::sum() const {
         Node* nextPtr = first->next;
 
         while (nextPtr != NULL) {
-            sum += nextPtr->value;
+            if (numeric_limits<float>::max() - nextPtr->value < sum) {
+                float temp = numeric_limits<float>::max() - sum;
+                temp = nextPtr->value - temp;
+                overflow++;
+                sum = temp;
+            } else {
+                sum += nextPtr->next;
+            }
             nextPtr = nextPtr->next;
         }
 

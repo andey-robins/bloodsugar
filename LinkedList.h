@@ -8,6 +8,7 @@
 #define _LINKED_LIST_H_
 
 #include "Node.h"
+#include <limits>
 
 class List {
 public:
@@ -25,6 +26,7 @@ public:
 
     Node *first;
     int day;
+    int overflow;
 };
 
 #endif
