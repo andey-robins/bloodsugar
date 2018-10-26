@@ -19,7 +19,7 @@ public:
     float removeFirst();
     void addData(float x);
 
-    float sum() const;
+    float sum();
     float max() const;
     float min() const;
     int count() const;

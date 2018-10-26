@@ -11,6 +11,7 @@
 //
 List::List(){
     first = NULL;
+    overflow = 0;
 }
 
 List::~List(){
@@ -56,7 +57,7 @@ void List::addData(float x) {
 //  DATA PROCESSING FUNCTIONS FOLLOW
 //
 //return the sum of all items in the list
-float List::sum() const {
+float List::sum() {
 
     if (first == NULL) {
         return 0.f;
@@ -67,13 +68,13 @@ float List::sum() const {
         Node* nextPtr = first->next;
 
         while (nextPtr != NULL) {
-            if (numeric_limits<float>::max() - nextPtr->value < sum) {
-                float temp = numeric_limits<float>::max() - sum;
+            if (std::numeric_limits<float>::max() - nextPtr->value < sum) {
+                float temp = std::numeric_limits<float>::max() - sum;
                 temp = nextPtr->value - temp;
                 overflow++;
                 sum = temp;
             } else {
-                sum += nextPtr->next;
+                sum += nextPtr->value;
             }
             nextPtr = nextPtr->next;
         }
