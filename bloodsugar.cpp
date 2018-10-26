@@ -175,7 +175,12 @@ void weeklySummary(List* data [], int day) {
     }
 
     //full output of weekly summary
-    cout << "The sum of all readings this week: " << totalSum << endl;
+    if (totalOverload == 0) {
+        cout << "The sum of all readings this week: " << totalSum << endl;
+    } else {
+        cout << "The total sum is " << totalOverload << " * " << numeric_limits<float>::max() << " + " << totalSum << endl;
+    }
+
     cout << "The maximum of readings this week: " << max << endl;
     cout << "The minimum of readings this week: " << min << endl;
     cout << "The count of readings this week  : " << count << endl;
