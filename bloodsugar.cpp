@@ -8,7 +8,6 @@
 #include <iostream>
 #include <string>
 #include <regex>
-#include <limits>
 #include <cmath>
 
 using namespace std;
@@ -94,7 +93,12 @@ void dailySummary(List* data [], int day) {
     List* head;
     head = data[day % 14];
 
-    cout << "The sum of all readings today: " << head->sum() << endl;
+    if (head->overflow == 0) {
+        cout << "The sum of all readings today: " << head->sum() << endl;
+    } else {
+        float mySum = head->sum();
+        cout << "The sum of all readings was " << head->overflow << " * " << numeric_limits<float>::max() << " + " << mySum << endl;
+    }
     cout << "The maximum value read today : " << head->max() << endl;
     cout << "The minimum value read today : " << head->min() << endl;
     cout << "The count of all values today: " << head->count() << endl;
@@ -120,8 +124,18 @@ void weeklySummary(List* data [], int day) {
 
     //calculate total sum of the week
     float totalSum = 0.f;
+    int totalOverload = 0;
     for (int i = 0; i < validDays; i++) {
         List* today = thisWeek[i];
+        totalOverload += today->overflow;
+
+        if (std::numeric_limits<float>::max() - today->sum() < totalSum) {
+            float temp = std::numeric_limits<float>::max() - totalSum;
+            temp = today->sum() - temp;
+            totalOverload++;
+            totalSum += temp;
+        }
+
         totalSum += today->sum();
     }
 
@@ -161,10 +175,20 @@ void weeklySummary(List* data [], int day) {
     }
 
     //full output of weekly summary
-    cout << "The sum of all readings this week: " << totalSum << endl;
+    if (totalOverload == 0) {
+        cout << "The sum of all readings this week: " << totalSum << endl;
+    } else {
+        cout << "The total sum is " << totalOverload << " * " << numeric_limits<float>::max() << " + " << totalSum << endl;
+    }
+
     cout << "The maximum of readings this week: " << max << endl;
     cout << "The minimum of readings this week: " << min << endl;
     cout << "The count of readings this week  : " << count << endl;
-    cout << deltaDay << " day(s) ago, the delta was the greatest." << endl;
+
+    if (day != 0) {
+        cout << deltaDay << " day(s) ago, the delta was the greatest." << endl;
+    } else {
+        cout << "Unable to calculate largest delta: Only one day of data present" << endl;
+    }
 
 }

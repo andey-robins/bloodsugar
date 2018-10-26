@@ -8,6 +8,7 @@
 #define _LINKED_LIST_H_
 
 #include "Node.h"
+#include <limits>
 
 class List {
 public:
@@ -18,13 +19,14 @@ public:
     float removeFirst();
     void addData(float x);
 
-    float sum() const;
+    float sum();
     float max() const;
     float min() const;
     int count() const;
 
     Node *first;
     int day;
+    int overflow;
 };
 
 #endif
